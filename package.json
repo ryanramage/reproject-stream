@@ -1,11 +1,15 @@
 {
   "name": "reproject-stream",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "reproject a stream of LDJSON into a different projection",
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ryanramage/reproject-stream.git"
   },
   "author": "Ryan Ramage",
   "license": "ISC",
@@ -16,5 +20,9 @@
     "pumpify": "^1.3.3",
     "set-from-path": "^2.0.2",
     "through2": "^0.6.3"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/ryanramage/reproject-stream/issues"
+  },
+  "homepage": "https://github.com/ryanramage/reproject-stream"
 }
