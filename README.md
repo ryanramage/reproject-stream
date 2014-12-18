@@ -36,6 +36,14 @@ To use a proj or wkt string
     cat something.json | reproject-stream "x" "y" "EPSG:3857" "+proj=gnom +lat_0=90 +lon_0=0 +x_0=6300000 +y_0=6300000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
 
 
+GEOJson objects
+----------------
+
+It can also reproject full GEOJson objects without having to specify they x and y. So Polygons and other shapes can be reprojected. Here is a long example of something like that.
+
+    cat assessment.csv | ldjson-csv  | jsonmap "this.geometry = JSON.parse(this.GEOMETRY); delete this.GEOMETRY; this.type = 'Feature'"| reproject-stream "+proj=tmerc +lat_0=0 +lon_0=-114 +k=0.9999 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs" --geojson
+
+
 
 Module Usage
 ------------
@@ -44,9 +52,10 @@ Module Usage
 
 then
 
-    var x_selector = 'x';
-    var y_selector = 'y';
-    var from_proj = 'EPSG:3857'
+    var opts = {};
+    opts.x_selector = 'x';
+    opts.y_selector = 'y';
+    opts.from_proj = 'EPSG:3857'
     fs.createReadStream('something.json')
       .pipe(reproject(x_selector, y_selector, from_proj))
       .pipe(process.stdout)
